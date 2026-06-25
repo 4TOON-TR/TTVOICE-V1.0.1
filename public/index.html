@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTVOICE-V1.0.1</title>
+    <link rel="stylesheet" href="style.css">
+       <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='105'>🎙</text></svg>">
+</head>
+<body>
+    <div class="container">
+    <!-- ====== هدر با لوگو و BY 4TOON ====== -->
+<header class="main-header">
+    <div class="logo-container">
+        <!-- لوگو (سمت راست) -->
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="logo.png" alt="TTVOICE Logo">
+            </div>
+            <div>
+                <span class="logo-text">TTVOICE</span>
+                <span class="logo-sub">Voice Chat</span>
+            </div>
+        </div>
+
+        <!-- BY 4TOON + دکمه‌ی مخفی (سمت چپ) -->
+        <div class="brand-container">
+            <span class="admin-hidden-btn" onclick="adminLogin()"></span>
+            <span class="rgb-text">BY 4TOON</span>
+        </div>
+    </div>
+</header>
+        <!-- ====== صفحه‌ی ورود ====== -->
+        <div id="login-page">
+            <div class="login-box">
+                <input type="text" id="userName" placeholder="اسم خودت رو وارد کن">
+                <input type="text" id="roomName" placeholder="اسم اتاق (اختیاری)">
+                <button onclick="createRoom()">❤️ ساخت اتاق جدید</button>
+                <div class="login-divider">
+                    <span>یا</span>
+                </div>
+                <div class="login-join">
+                    <input type="text" id="roomIdInput" placeholder="کد اتاق را وارد کن">
+                    <button onclick="joinRoom()">ورود به اتاق</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== صفحه‌ی تماس ====== -->
+        <div id="call-page" style="display:none;">
+            <div class="call-header">
+                <span id="room-title">🏠 اتاق</span>
+                <span id="user-count">👤 0 نفر</span>
+                <span id="admin-badge" style="display:none;color:#f7971e;font-weight:700;font-size:0.85rem;">👑 ادمین</span>
+                <button onclick="leaveRoom()" class="leave-btn">🚪 خروج</button>
+            </div>
+
+            <div id="users-list" class="users-list"></div>
+
+            <div class="audio-controls">
+                <button id="mic-btn" onclick="toggleMic()" class="active">🎤 میکروفن</button>
+                <button id="speaker-btn" onclick="toggleSpeaker()" class="active">🔊 اسپیکر</button>
+            </div>
+
+            <div class="image-share">
+                <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="shareImage(event)">
+                <button onclick="document.getElementById('imageInput').click()">📸 اشتراک عکس</button>
+                <div id="images-container" class="images-container"></div>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <span>💬 چت</span>
+                    <button onclick="clearChat()" class="clear-chat-btn" title="پاک کردن همه پیام‌ها (فقط ادمین)">🗑️</button>
+                </div>
+                <div id="chat-messages" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="پیامت رو بنویس..." onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()">📤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
